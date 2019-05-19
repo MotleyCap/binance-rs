@@ -2,6 +2,7 @@ use account::*;
 use market::*;
 use general::*;
 use userstream::*;
+use wapi::*;
 use client::*;
 
 //#[derive(Clone)]
@@ -38,6 +39,15 @@ impl Binance for Market {
 impl Binance for UserStream {
     fn new(api_key: Option<String>, secret_key: Option<String>) -> UserStream {
         UserStream {
+            client: Client::new(api_key, secret_key),
+            recv_window: 5000,
+        }
+    }
+}
+
+impl Binance for Wapi {
+    fn new(api_key: Option<String>, secret_key: Option<String>) -> Wapi {
+        Wapi {
             client: Client::new(api_key, secret_key),
             recv_window: 5000,
         }

@@ -30,5 +30,6 @@ pub mod api;
 pub mod general;
 pub mod account;
 pub mod market;
+pub mod wapi;
 pub mod userstream;
 pub mod websockets;

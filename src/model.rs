@@ -480,6 +480,24 @@ pub struct DepthOrderBookEvent {
     #[serde(rename = "a")] pub asks: Vec<Asks>
 }
 
+#[derive(Debug, Serialize, Deserialize, Clone)]
+#[serde(rename_all = "camelCase")]
+pub struct DepositHistory {
+    pub success: bool,
+    pub deposit_list: Vec<Deposit>,
+}
+
+#[derive(Debug, Serialize, Deserialize, Clone)]
+#[serde(rename_all = "camelCase")]
+pub struct Deposit {
+    pub insertTime: u64,
+    pub amount: f64,
+    pub asset: String,
+    pub address: String,
+    pub txId: String,
+    pub status: i32
+}
+
 mod string_or_float {
     use std::fmt;
 
@@ -501,7 +519,7 @@ mod string_or_float {
             String(String),
             Float(f64),
         }
-        
+
         match StringOrFloat::deserialize(deserializer)? {
             StringOrFloat::String(s) => s.parse().map_err(de::Error::custom),
             StringOrFloat::Float(i) => Ok(i),

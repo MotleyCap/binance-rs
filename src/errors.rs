@@ -9,7 +9,10 @@ error_chain! {
     }
 
     errors {
-        BinanceError(code: i16, msg: String, response: reqwest::Response)
+        BinanceError(code: i16, msg: String, response: reqwest::Response) {
+            description("BinanceError"),
+            display("BinanceError({}): {}", code, msg),
+        }
      }
 
     foreign_links {
